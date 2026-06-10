@@ -1,0 +1,7 @@
+.env
+venv/
+bepi_data/*.db
+bepi_data/*.db-*
+__pycache__/
+*.pyc
+.streamlit/
