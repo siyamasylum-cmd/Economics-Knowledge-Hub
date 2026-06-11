@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import os
 import sqlite3
@@ -18,8 +18,16 @@ from bepi.brief_generator import generate_brief, list_recent_briefs, save_brief
 
 load_dotenv()
 DB_PATH = Path(os.getenv("DB_PATH", "bepi_data/bepi.db"))
-SAMPLE_ARTICLES_PATH = PROJECT_ROOT / "bepi_data" / "sample_articles.csv"
-SAMPLE_HISTORY_PATH = PROJECT_ROOT / "bepi_data" / "sample_bepi_history.csv"
+SAMPLE_ARTICLE_CANDIDATES = [
+    PROJECT_ROOT / "bepi_data" / "sample_articles.csv",
+    PROJECT_ROOT / "sample_articles.csv",
+]
+SAMPLE_HISTORY_CANDIDATES = [
+    PROJECT_ROOT / "bepi_data" / "sample_bepi_history.csv",
+    PROJECT_ROOT / "sample_bepi_history.csv",
+]
+SAMPLE_ARTICLES_PATH = next((path for path in SAMPLE_ARTICLE_CANDIDATES if path.exists()), SAMPLE_ARTICLE_CANDIDATES[0])
+SAMPLE_HISTORY_PATH = next((path for path in SAMPLE_HISTORY_CANDIDATES if path.exists()), SAMPLE_HISTORY_CANDIDATES[0])
 
 st.set_page_config(page_title="Economics Knowledge Hub", layout="wide")
 st.title("Economics Knowledge Hub")
